@@ -8,6 +8,7 @@ import {
 import Home from './Components/Pages/Home/Home';
 import Login from './Components/Pages/Login/Login';
 import Registry from './Components/Pages/Registration/Registry';
+import AuthProvider from './Provider/AuthProvider';
 
 // Define the router with routes
 const router = createBrowserRouter([
@@ -30,6 +31,8 @@ const router = createBrowserRouter([
 // Render the application
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
   </StrictMode>,
 );
