@@ -1,7 +1,7 @@
-import { Outlet, useLocation } from "react-router-dom";
+import { Outlet,  } from "react-router-dom";
 import Product from "../Product/Product";
 const Home = () => {
-    const location=useLocation()
+   
     return (
         <div>
            <Outlet></Outlet>
