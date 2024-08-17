@@ -8,8 +8,10 @@ const Product = () => {
   const limit = 10;
   const [search, setSearch] = useState('');
   const [debouncedSearch, setDebouncedSearch] = useState('');
-
- 
+  const [brand, setBrand] = useState('');
+  const [category, setCategory] = useState('');
+  const [priceRange, setPriceRange] = useState([0, Infinity]);
+ const [sort,setSort]=useState('')
   const handleSearchChange = debounce((value) => {
     setDebouncedSearch(value);
     setCurrentPage(1);
@@ -19,23 +21,26 @@ const Product = () => {
     handleSearchChange(search);
   }, [search]);
 
-  const { data: mobileData, isLoading, isError, error } = useMobile(currentPage, limit, debouncedSearch);
+  const { data: mobileData, isLoading, isError, error } = useMobile(currentPage, limit, debouncedSearch, brand, category, priceRange,sort);
 
   if (isLoading) return <p>Loading...</p>;
   if (isError) return <p>Error: {error.message}</p>;
 
   const data = mobileData?.items || [];
   const totalPages = mobileData?.totalPages || 0;
-  
+
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
 
   const handleToSearch = (e) => {
     e.preventDefault();
-    setSearch(e.target.search.value); // Set the search state on form submission
+    setSearch(e.target.search.value);
+    setCurrentPage(1);
   };
-
+ const handleSortChange=e=>{
+    setSort(e.target.value)
+ }
   return (
     <div>
       <form onSubmit={handleToSearch}>
@@ -43,13 +48,62 @@ const Product = () => {
           type="text"
           name="search"
           value={search}
-          onChange={(e) => setSearch(e.target.value)} // Update the search state
+          onChange={(e) => setSearch(e.target.value)}
           placeholder="Search by product name"
           className="mb-4 p-2 border border-gray-300 rounded"
         />
-       
       </form>
-      
+      <div className="mb-4">
+        <select onChange={handleSortChange} value={sort}>
+          <option value="">Sort By</option>
+          <option value="priceAsc">Price: Low to High</option>
+          <option value="priceDesc">Price: High to Low</option>
+          <option value="dateDesc">Date Added: Newest First</option>
+        </select>
+      </div>
+
+
+      {/* Filters */}
+     <div>
+        <h1 className="text-lg  font-bold">Filter Product</h1>
+     <div className="filters mt-4 flex">
+       
+       <div>
+         <label>Brand:</label>
+         <input
+           type="text"
+           value={brand}
+           onChange={(e) => setBrand(e.target.value)}
+           placeholder="Filter by brand"
+         />
+       </div>
+       <div>
+         <label>Category:</label>
+         <input
+           type="text"
+           value={category}
+           onChange={(e) => setCategory(e.target.value)}
+           placeholder="Filter by category"
+         />
+       </div>
+       <div>
+         <label>Price Range:</label>
+         <input
+           type="number"
+           value={priceRange[0]}
+           onChange={(e) => setPriceRange([Number(e.target.value), priceRange[1]])}
+           placeholder="Min Price"
+         />
+         <input
+           type="number"
+           value={priceRange[1]}
+           onChange={(e) => setPriceRange([priceRange[0], Number(e.target.value)])}
+           placeholder="Max Price"
+         />
+       </div>
+     </div>
+     </div>
+
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         {data.map((mobile, indx) => (
           <Card
