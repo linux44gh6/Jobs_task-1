@@ -1,4 +1,11 @@
+import { useContext } from "react";
+import { AuthContext } from "../../../Provider/AuthProvider";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
+
 const Registry = () => {
+  const navigate=useNavigate()
+  const {createUser}=useContext(AuthContext)
   const handleToSubmit = (e) => {
     e.preventDefault();
 
@@ -11,8 +18,18 @@ const Registry = () => {
       email,
       password,
     };
-
-    console.log(userInfo);
+    createUser(email,password)
+    .then(res=>{
+      console.log(res);
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "Your work has been saved",
+        showConfirmButton: false,
+        timer: 1500
+      });
+      navigate('/')
+    })
   };
 
   return (
