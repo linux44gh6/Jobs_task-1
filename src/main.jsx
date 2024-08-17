@@ -14,13 +14,18 @@ import {
   QueryClient,
   QueryClientProvider,
 } from '@tanstack/react-query'
+import Root from './RootLayout/Root';
 const queryClient = new QueryClient()
 // Define the router with routes
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Home />,
+    element: <Root />,
     children: [
+      {
+        index:true,
+        element:<Home></Home>
+      },
       {
         path: '/login',
         element: <Login />

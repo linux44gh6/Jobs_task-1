@@ -1,17 +1,18 @@
-import { Outlet,  } from "react-router-dom";
-import Product from "../Product/Product";
+import { Outlet, useLocation } from "react-router-dom";
 import Nav from "../../../Shared/NavBar/Nav";
 import Footer from "../../../Shared/Footer/Footer";
+import Product from "../Product/Product";
+
 const Home = () => {
-   
+    
     return (
         <div>
-           <Outlet></Outlet>
-           <div>
-            <Nav></Nav>
-            <Product></Product>
-            <Footer></Footer>
-           </div>
+        
+                    <Nav></Nav>
+                    <Product />
+              
+        <Footer></Footer>
+            
         </div>
     );
 };

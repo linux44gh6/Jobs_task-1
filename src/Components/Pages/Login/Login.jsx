@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom";
 
 const Login = () => {
     return (
@@ -27,6 +28,9 @@ const Login = () => {
           <button className="btn btn-primary">Login</button>
         </div>
       </form>
+      <NavLink to={'/register'}>
+      <p>New here? please sign Up</p>
+      </NavLink>
     </div>
   </div>
 </div>
