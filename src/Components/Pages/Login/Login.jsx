@@ -14,9 +14,22 @@ const navigate=useNavigate()
     logIn(email,password)
     .then(()=>{
       Swal.fire({
-        position: "top-end",
+        position: "top-center",
         icon: "success",
-        title: "Your work has been saved",
+        title: "Login successful",
+        showConfirmButton: false,
+        timer: 1500
+      });
+      navigate('/')
+    })
+  }
+  const  handleToGoogleLogin=()=>{
+    logInWithGoogle()
+    .then(()=>{
+      Swal.fire({
+        position: "top-center",
+        icon: "success",
+        title: "Log In with google success",
         showConfirmButton: false,
         timer: 1500
       });
@@ -50,7 +63,7 @@ const navigate=useNavigate()
           <button className="btn bg-blue-600 text-white">Login</button>
         </div>
         <div className="divider">OR</div>
-        <button className="btn bg-blue-600 w-full text-white hover:bg-blue-600">Google Login</button>
+        <button onClick={handleToGoogleLogin} className="btn bg-blue-600 w-full text-white hover:bg-blue-600">Google Login</button>
         <NavLink to={'/register'}>
       <p>New here? please <span className="underline text-blue-600  font-semibold">sign Up</span></p>
       </NavLink>
