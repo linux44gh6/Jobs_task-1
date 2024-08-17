@@ -4,7 +4,7 @@ const Card = ({mobile}) => {
     const {id,productImage,productName,description,price}=mobile
     return (
         <div>
-            <div className="card card-compact bg-base-100  shadow-xl">
+            <div className="card card-compact bg-base-100 h-[400px]  shadow-xl">
   <figure>
     <img className="w-[200px] h-[200px]"
       src={productImage}
@@ -17,7 +17,7 @@ const Card = ({mobile}) => {
     </div>
     <p className="text-gray-500 font-semibold">{description}</p>
     <div className="card-actions justify-end">
-      <button className="btn btn-primary">Buy Now</button>
+      <button className="btn bg-blue-600 text-white hover:bg-blue-600">Buy Now</button>
     </div>
   </div>
 </div>

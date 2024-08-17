@@ -42,8 +42,9 @@ const Product = () => {
     setSort(e.target.value)
  }
   return (
-    <div>
-      <form onSubmit={handleToSearch}>
+    <div className="px-1 md:px-3 lg:px-5">
+     <div className="flex flex-col md:flex-row lg:flex-row items-center gap-6">
+     <form onSubmit={handleToSearch}>
         <input
           type="text"
           name="search"
@@ -61,15 +62,16 @@ const Product = () => {
           <option value="dateDesc">Date Added: Newest First</option>
         </select>
       </div>
+     </div>
 
 
       {/* Filters */}
-     <div>
+     <div className=" mb-10">
         <h1 className="text-lg  font-bold">Filter Product</h1>
-     <div className="filters mt-4 flex">
+     <div className="filters mt-4 flex flex-col md:flex-row lg:flex-row">
        
        <div>
-         <label>Brand:</label>
+         <label className=" font-bold">Brand:</label>
          <input
            type="text"
            value={brand}
@@ -78,7 +80,7 @@ const Product = () => {
          />
        </div>
        <div>
-         <label>Category:</label>
+         <label className=" font-bold">Category:</label>
          <input
            type="text"
            value={category}
@@ -87,7 +89,7 @@ const Product = () => {
          />
        </div>
        <div>
-         <label>Price Range:</label>
+         <label className=" font-bold">Price Range:</label>
          <input
            type="number"
            value={priceRange[0]}
@@ -104,7 +106,7 @@ const Product = () => {
      </div>
      </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {data.map((mobile, indx) => (
           <Card
             key={indx}
